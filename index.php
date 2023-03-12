@@ -29,42 +29,5 @@
         <input type="submit" value="Envoyer">
 </form>
 
-<?php
-
-require_once 'connexion.php';
-
-if($_POST['pseudo'] != '' && $_POST['mail'] != '' && $_POST['profil'] != '') {
-    
-    $data = [
-
-        'pseudo' => $_POST['pseudo'],
-
-        'mail' => $_POST['mail'],
-
-        'profil' => $_POST('profil')
-    ];
-
-    $requete = $database->prepare('INSERT INTO users (pseudo, mail, profil) VALUES (:pseudo, :mail, :profil)');
-    $requete->execute($data);
-    $tweets = $requete->fetchAll(PDO::FETCH_ASSOC);
-    $requetes = $database->prepare('SELECT profil FROM users WHERE id=1');
-    $requetes->execute();
-    $image = $requetes->fetchAll(PDO::FETCH_ASSOC);
-    ?>
-    
-    <?php
-
-if($requete) {
-    header('Location: index.php');
-}
-else {
-    echo 'Une erreur est survenue.';
-}
-}
-else {
-    echo 'Veuillez remplir tous les champs.';
-}
-
-?>
 </body>
 </html>
